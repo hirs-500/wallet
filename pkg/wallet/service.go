@@ -10,10 +10,10 @@ import (
 var ErrPhoneRegistered = errors.New("phone already registered")
 //ErrAmountMustBePositive баланс дольжен бить выше 0.
 var ErrAmountMustBePositive = errors.New("amount must be greater zero")
-//ErrAccountNotFond аккаунт не найден 
-var ErrAccountNotFond = errors.New("account not fond")
-//ErrNotEgnoughBalance not egnough balance
-var ErrNotEgnoughBalance = errors.New( "not egnough balance")
+//ErrAccountNotFound аккаунт не найден 
+var ErrAccountNotFound = errors.New("account not found")
+//ErrNotEnoughBalance not egnough balance
+var ErrNotEnoughBalance = errors.New( "not enough balance")
 // Service информация 
 type Service struct {
 nextAccountID int64
@@ -52,7 +52,7 @@ for _, acc := range s.accounts {
 		break
 	}
 	if account ==nil {
-		return ErrAccountNotFond
+		return ErrAccountNotFound
 	}
 	
 }
@@ -75,9 +75,9 @@ if acc.ID == accountID{
 
 }
 if account == nil{
-return nil, ErrAccountNotFond
+return nil, ErrAccountNotFound
 }
-if account.Balance < amount{return nil, ErrNotEgnoughBalance
+if account.Balance < amount{return nil, ErrNotEnoughBalance
 }
 account.Balance -=amount
 paymentID := uuid.New().String()
@@ -102,7 +102,7 @@ for _, acc := range s.accounts {
 		break
 	}
 	if account ==nil {
-		return nil, ErrAccountNotFond 
+		return nil, ErrAccountNotFound 
 	}
 }
 
