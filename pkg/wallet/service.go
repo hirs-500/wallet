@@ -14,8 +14,8 @@ var ErrAmountMustBePositive = errors.New("amount must be greater zero")
 var ErrAccountNotFound = errors.New("account not found")
 //ErrNotEnoughBalance not egnough balance
 var ErrNotEnoughBalance = errors.New( "not enough balance")
-//ErrNotPaymentNotFound платеж не найден. 
-var ErrNotPaymentNotFound = errors.New("payment not found")
+//ErrPaymentNotFound платеж не найден. 
+var ErrPaymentNotFound = errors.New("payment not found")
 // Service информация 
 type Service struct {
 nextAccountID int64
@@ -119,7 +119,7 @@ func (s *Service)FindPaymentByID (paymentID string) (*types.Payment, error ) {
                break
 		}
 	if payment == nil {
-		return nil, ErrNotPaymentNotFound
+		return nil, ErrPaymentNotFound
 
 	}
 		
