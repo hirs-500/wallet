@@ -32,3 +32,11 @@ type Payment struct {
 	 Balance Money 
  }
 
+//Favorite структура избранного платежа 
+type Favorite struct {
+	ID  string
+	AccountID  int64
+	Name   string
+	Amount  Money
+	Category PaymentCategory 
+}
