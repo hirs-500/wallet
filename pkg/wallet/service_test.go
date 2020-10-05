@@ -96,3 +96,38 @@ func TestService_Reject_fail_user(t *testing.T){
 
 
 }
+
+func TestService_Repeat_success_user(t *testing.T){
+	var svc Service
+	
+	account, err := svc.RegisterAccount("+992918630008")
+
+	if err != nil{
+		t.Errorf("method RegisterAccount returned not nil error, account => %v", account)
+	}
+
+	err = svc.Deposit(account.ID, 88_888_88)
+	if err != nil{
+		t.Errorf("method Deposit returned not nil error, error => %v", err)
+	}
+
+
+	payment, err := svc.Pay(account.ID, 11_111,"fun")
+
+	if err != nil{
+		t.Errorf("method Pay returned not nil error, account => %v", account)
+	}
+
+	newPayment, err := svc.FindPaymentByID(payment.ID)
+
+	if err != nil{
+		t.Errorf("method FindPaymentByID returned not nil error, payment => %v", payment)
+	}
+
+	paymentRepeat, err := svc.Repeat(newPayment.ID)
+
+	if err != nil{
+		t.Errorf("method Repeat returned not nil error, paymentRepeat => %v", paymentRepeat)
+	}
+
+}
