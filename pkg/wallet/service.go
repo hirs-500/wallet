@@ -118,12 +118,13 @@ func (s *Service)FindPaymentByID (paymentID string) (*types.Payment, error ) {
 			payment = pay
                break
 		}
+	}
 	if payment == nil {
 		return nil, ErrPaymentNotFound
 
 	}
 		
-	}
+	
 	return payment, nil
 }
 //Reject отмена платежа
