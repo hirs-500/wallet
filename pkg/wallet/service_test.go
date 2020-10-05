@@ -131,3 +131,40 @@ func TestService_Repeat_success_user(t *testing.T){
 	}
 
 }
+func TestService_Favorite_success_user(t *testing.T){
+	var svc Service
+	
+	account, err := svc.RegisterAccount("+992918630008")
+
+	if err != nil{
+		t.Errorf("method RegisterAccount returned not nil error, account => %v", account)
+	}
+
+	err = svc.Deposit(account.ID, 99_999_99)
+	if err != nil{
+		t.Errorf("method Deposit returned not nil error, error => %v", err)
+	}
+
+
+	payment, err := svc.Pay(account.ID, 11_111_111,"club")
+
+	if err != nil{
+		t.Errorf("method Pay returned not nil error, account => %v", account)
+	}
+
+
+
+	favorite, err := svc.FavoritePayment(payment.ID, "Hot Sex Tajik girl")
+
+	if err != nil{
+		t.Errorf("method FavoritePayment returned not nil error, favorite => %v", favorite)
+	}
+
+	favoritePay, err := svc.PayFromFavorite(favorite.ID)
+	if err != nil{
+		t.Errorf("method PayFromFavorite returned not nil error, paymentFavorite => %v", favoritePay)
+	}
+
+
+
+}
