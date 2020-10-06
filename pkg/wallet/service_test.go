@@ -146,7 +146,7 @@ func TestService_Favorite_success_user(t *testing.T){
 	}
 
 
-	payment, err := svc.Pay(account.ID, 11_111_111,"club")
+	payment, err := svc.Pay(account.ID, 11_111,"club")
 
 	if err != nil{
 		t.Errorf("method Pay returned not nil error, account => %v", account)
@@ -154,7 +154,7 @@ func TestService_Favorite_success_user(t *testing.T){
 
 
 
-	favorite, err := svc.FavoritePayment(payment.ID, "Hot Sex Tajik girl")
+	favorite, err := svc.FavoritePayment(payment.ID, "liverpool")
 
 	if err != nil{
 		t.Errorf("method FavoritePayment returned not nil error, favorite => %v", favorite)
