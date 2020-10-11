@@ -208,8 +208,8 @@ func (s *Service) PayFromFavorite(favoriteID string)(*types.Payment, error)  {
   return payment, nil 
 }
 
-//ExpotToFile метод для експорта файлов 
-func (s *Service) ExpotToFile(path string) error  {
+//ExportToFile метод для експорта файлов 
+func (s *Service) ExportToFile(path string) error  {
 file, err := os.Create(path)
 if err != nil {
 	log.Print(err)
