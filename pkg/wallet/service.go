@@ -220,7 +220,7 @@ if err != nil {
 defer func (){   
 	
 	if cerr := file.Close(); cerr != nil {
-		log.Print(err)
+		log.Print(cerr)
 	}
 
 }()
