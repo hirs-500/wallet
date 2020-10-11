@@ -1,9 +1,13 @@
 package wallet
 
 import (
+	"strconv"
 	"github.com/hirs-500/wallet/pkg/types"
 	"github.com/google/uuid"
 	"errors"
+	"os"
+	"log"
+	
 )
 
 // ErrPhoneRegistered этот номер уже заригестрирован.
@@ -202,4 +206,37 @@ func (s *Service) PayFromFavorite(favoriteID string)(*types.Payment, error)  {
 	  return nil, err
   }
   return payment, nil 
+}
+
+//ExpotToFile метод для експорта файлов 
+func (s *Service) ExpotToFile(path string) error  {
+file, err := os.Create(path)
+if err != nil {
+	log.Print(err)
+	return err
+}
+defer func (){   
+	
+	if cerr := file.Close(); cerr != nil {
+		log.Print(err)
+	}
+
+}()
+ 
+fil := "" 
+for _, v := range s.accounts {
+	id := strconv.Itoa(int(v.ID))+ ";"
+	phone := string(v.Phone) + ";"
+	balance := strconv.Itoa(int(v.Balance))
+	fil += id
+	fil += phone
+	fil += balance + "|"
+}
+
+_, err = file.Write([]byte(fil))
+if err != nil {
+	log.Print(err)
+	return err
+}
+return err
 }
