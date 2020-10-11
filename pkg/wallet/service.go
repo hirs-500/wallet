@@ -22,6 +22,8 @@ var ErrNotEnoughBalance = errors.New( "not enough balance")
 var ErrPaymentNotFound = errors.New("payment not found")
 //ErrFavoriteNotFound избранный платёж не найден 
 var ErrFavoriteNotFound = errors.New("favorite not found")
+//ErrFileNotFound - file not found
+var ErrFileNotFound = errors.New("file not found")
 // Service информация 
 type Service struct {
 nextAccountID int64
@@ -213,7 +215,7 @@ func (s *Service) ExportToFile(path string) error  {
 file, err := os.Create(path)
 if err != nil {
 	log.Print(err)
-	return err
+	return ErrFileNotFound
 }
 defer func (){   
 	
@@ -236,7 +238,7 @@ for _, v := range s.accounts {
 _, err = file.Write([]byte(data))
 if err != nil {
 	log.Print(err)
-	return err
+	return ErrFileNotFound
 }
-return err
+return nil
 }
