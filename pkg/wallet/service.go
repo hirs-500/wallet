@@ -223,17 +223,17 @@ defer func (){
 
 }()
  
-fil := "" 
+data:= "" 
 for _, v := range s.accounts {
 	id := strconv.Itoa(int(v.ID))+ ";"
 	phone := string(v.Phone) + ";"
 	balance := strconv.Itoa(int(v.Balance))
-	fil += id
-	fil += phone
-	fil += balance + "|"
+	data += id
+	data += phone
+	data += balance + "|"
 }
 
-_, err = file.Write([]byte(fil))
+_, err = file.Write([]byte(data))
 if err != nil {
 	log.Print(err)
 	return err
