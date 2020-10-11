@@ -12,5 +12,5 @@ svc := &wallet.Service{}
 svc.RegisterAccount("+22665225")
 svc.RegisterAccount("+12665225")
 svc.RegisterAccount("+02665225")
-svc.ExpotToFile("data/export")
+svc.ExportToFile("data/export")
 }
