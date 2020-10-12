@@ -114,11 +114,11 @@ for _, acc := range s.accounts {
 	if acc.ID == accountID{
 		account=acc
 		break
-	}
+	}}
 	if account ==nil {
 		return nil, ErrAccountNotFound 
 	}
-}
+
 
 return account, nil 
 }
