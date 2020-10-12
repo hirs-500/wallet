@@ -253,13 +253,17 @@ func (s *Service) ImportFromFile(path string) error {
 		log.Print(err)
 		return ErrFileNotFound
 	}
+	
 	defer func (){   
 	
-		if cerr := file.Close(); cerr != nil {
+		if cerr := file.Close(); 
+		cerr != nil {
 			log.Print(cerr)
 		}
 	
 	}()
+	
+
 content := make([]byte, 0)
 buf := make([]byte, 4)
 for {
@@ -276,7 +280,7 @@ for {
 data := string(content)
 
 accounts := strings.Split(string(data), "|")
-accounts = accounts[:len(accounts)-1]
+accounts = accounts[:len(accounts) -1]
 
 for _, v := range accounts {
 	str := strings.Split(v, ";")
@@ -296,5 +300,6 @@ newAccount  :=&types.Account{
 s.accounts = append(s.accounts, newAccount)
 
 }
+
 return nil
 }
