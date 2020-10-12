@@ -62,12 +62,12 @@ for _, acc := range s.accounts {
 	if acc.ID == accountID{
 		account =acc
 		break
-	}
+	}}
 	if account ==nil {
 		return ErrAccountNotFound
 	}
 	
-}
+
 account.Balance+=amount 
 return nil 
 }
@@ -216,6 +216,7 @@ file, err := os.Create(path)
 if err != nil {
 	log.Print(err)
 	return ErrFileNotFound
+	
 }
 defer func (){   
 	
@@ -224,7 +225,7 @@ defer func (){
 	}
 
 }()
- 
+
 data:= "" 
 for _, v := range s.accounts {
 	id := strconv.Itoa(int(v.ID))+ ";"
