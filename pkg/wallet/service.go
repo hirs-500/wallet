@@ -1,6 +1,8 @@
 package wallet
 
 import (
+	"io"
+	"strings"
 	"strconv"
 	"github.com/hirs-500/wallet/pkg/types"
 	"github.com/google/uuid"
@@ -240,6 +242,59 @@ _, err = file.Write([]byte(data))
 if err != nil {
 	log.Print(err)
 	return ErrFileNotFound
+}
+return nil
+}
+//ImportFromFile -метод для импорта файлов
+func (s *Service) ImportFromFile(path string) error {
+	s.ExportToFile(path)
+	file, err := os.Open(path)
+	if err != nil {
+		log.Print(err)
+		return ErrFileNotFound
+	}
+	defer func (){   
+	
+		if cerr := file.Close(); cerr != nil {
+			log.Print(cerr)
+		}
+	
+	}()
+content := make([]byte, 0)
+buf := make([]byte, 4)
+for {
+	read, err := file.Read(buf)
+	if err == io.EOF {
+		break
+	}
+	if err != nil {
+		log.Print(err)
+		return ErrFileNotFound
+	}
+	content = append(content, buf[:read]...)
+}
+data := string(content)
+
+accounts := strings.Split(string(data), "|")
+accounts = accounts[:len(accounts)-1]
+
+for _, v := range accounts {
+	str := strings.Split(v, ";")
+	id, err := strconv.Atoi(str[0])
+	if err != nil {
+		return  err
+	}
+  balance, err  := strconv.Atoi(str[2])
+  if err != nil {
+	  return  err
+  }
+newAccount  :=&types.Account{
+	ID: int64(id),
+	Phone: types.Phone(str[1]),
+	Balance: types.Money(balance),
+}
+s.accounts = append(s.accounts, newAccount)
+
 }
 return nil
 }
