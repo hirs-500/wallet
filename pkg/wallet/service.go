@@ -247,7 +247,7 @@ return nil
 }
 //ImportFromFile -метод для импорта файлов
 func (s *Service) ImportFromFile(path string) error {
-	s.ExportToFile(path)
+	
 	file, err := os.Open(path)
 	if err != nil {
 		log.Print(err)
